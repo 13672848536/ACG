@@ -1,0 +1,44 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.xjlacgapp.mapper.BrowseMapper">
+    <insert id="addBrowse" parameterType="com.example.xjlacgapp.pojo.Browse">
+        insert into acg_browse values (#{userid},#{productid},#{createtime},#{age},#{type})
+    </insert>
+    <select id="queryById" resultType="com.example.xjlacgapp.pojo.Browse">
+        select * from acg_browse where userid = #{userid} order by createtime asc
+    </select>
+    <select id="likeType" resultType="com.example.xjlacgapp.pojo.Browse">
+        SELECT TOP(1) type
+        FROM
+            (
+                SELECT type, COUNT(1) AS num
+                FROM [acg_browse ]
+                WHERE 20 >= age
+                GROUP BY type
+            ) AS t
+        ORDER BY num DESC
+    </select>
+    <select id="likeType2" resultType="com.example.xjlacgapp.pojo.Browse">
+        SELECT TOP(1) type
+        FROM
+            (
+                SELECT type, COUNT(1) AS num
+                FROM [acg_browse ]
+                WHERE age BETWEEN 21 AND 25
+                GROUP BY type
+            ) AS t
+        ORDER BY num DESC
+    </select>
+    <select id="likeType3" resultType="com.example.xjlacgapp.pojo.Browse">
+        SELECT TOP(1) type
+        FROM
+            (
+                SELECT type, COUNT(1) AS num
+                FROM [acg_browse ]
+                WHERE age >=26
+                GROUP BY type
+            ) AS t
+        ORDER BY num DESC
+    </select>
+</mapper>

@@ -1,0 +1,32 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.xjlacgapp.mapper.OrderMapper">
+    <insert id="addOrder" parameterType="com.example.xjlacgapp.pojo.Order">
+        insert into acg_order values (#{id},#{userid},#{total},#{createtime},#{productid},#{state},#{type},#{size},#{month},#{style})
+    </insert>
+    <select id="queryById" resultType="com.example.xjlacgapp.pojo.Order">
+        select * from acg_order where userid = #{userid} order by createtime asc
+    </select>
+    <select id="queryById3" resultType="com.example.xjlacgapp.pojo.Order">
+        select productid from acg_order where userid = #{userid} group by productid
+    </select>
+    <select id="findId" resultType="com.example.xjlacgapp.pojo.Order">
+        select userid from acg_order group by userid
+    </select>
+    <select id="queryById2" resultType="com.example.xjlacgapp.pojo.Order">
+        select * from acg_order where id = #{id}
+    </select>
+    <select id="queryByProduct" resultType="com.example.xjlacgapp.pojo.Order">
+        select * from acg_order where productid = #{productid} order by createtime asc
+    </select>
+    <update id="update" parameterType="com.example.xjlacgapp.pojo.Order">
+        update acg_order set state = #{state} where id = #{id}
+    </update>
+    <select id="queryByTotal" resultType="com.example.xjlacgapp.model.LookDTO">
+        SELECT    month name ,sum(total) value FROM acg_order   where productid = #{productid} GROUP BY month
+    </select>
+    <select id="SumTotal" resultType="com.example.xjlacgapp.pojo.Order">
+        SELECT   sum(total) total FROM acg_order   where productid = #{productid} and userid = #{userid}
+    </select>
+</mapper>

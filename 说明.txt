@@ -1,0 +1,5 @@
+系统采用JAVA+SQL Server
+框架是 Springboot+Mybatis+Vue
+购物车数据库表可有可无
+开发工具是IDEA、VS Code
+acg文件是前端，xjl-acg-app是后端

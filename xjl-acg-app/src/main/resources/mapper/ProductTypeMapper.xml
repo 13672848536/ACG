@@ -1,0 +1,26 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.xjlacgapp.mapper.ProductTypeMapper">
+    <insert id="addProductType" parameterType="com.example.xjlacgapp.pojo.ProductType">
+        insert into acg_producttype values (#{productid},#{type},#{size},#{stock})
+    </insert>
+    <select id="queryById" resultType="com.example.xjlacgapp.pojo.ProductType">
+        select * from acg_producttype where id = #{productid}
+    </select>
+    <select id="findType" resultType="com.example.xjlacgapp.pojo.ProductType">
+        SELECT type FROM acg_producttype where id = #{productid} GROUP BY type
+    </select>
+    <select id="queryId" resultType="com.example.xjlacgapp.pojo.ProductType">
+        select * from acg_producttype where id = #{productid} and type  = #{type} and size = #{size}
+    </select>
+    <select id="findSize" resultType="com.example.xjlacgapp.pojo.ProductType">
+        SELECT * FROM acg_producttype where id = #{productid} AND type = #{type}
+    </select>
+    <update id="updateStock" parameterType="com.example.xjlacgapp.pojo.ProductType">
+        update acg_producttype set stock = #{stock} where id = #{productid} and type = #{type} and size = #{size}
+    </update>
+    <delete id="deleteByProductType" parameterType="com.example.xjlacgapp.pojo.ProductType">
+        delete from acg_producttype where id = #{productid} and type  = #{type} and size = #{size}
+    </delete>
+</mapper>

@@ -1,0 +1,67 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.xjlacgapp.mapper.UserMapper">
+    <select id="queryAll" resultType="com.example.xjlacgapp.pojo.User">
+        select * from acg_users where type = '普通用户'
+    </select>
+    <select id="findTotal" resultType="com.example.xjlacgapp.pojo.User">
+        select count(*)id FROM acg_users where nickname like '%'+#{nickname}+'%' and type = '普通用户'
+    </select>
+    <insert id="add" parameterType="com.example.xjlacgapp.pojo.User">
+        insert into acg_users values (#{id},#{name},#{password},#{type},#{nickname},#{phone},#{identification},#{email},#{address},#{sex},#{year},#{img},#{provincial},#{city})
+    </insert>
+
+    <select id="queryByNickname" resultType="com.example.xjlacgapp.pojo.User">
+        select * from acg_users where nickname = #{nickname}
+    </select>
+    <update id="updatePassword" parameterType="com.example.xjlacgapp.pojo.User">
+    update acg_users set password = #{password} where nickname = #{nickname}
+    </update>
+    <update id="updateYear" parameterType="com.example.xjlacgapp.pojo.User">
+        update acg_users set year = #{year} where id = #{id}
+    </update>
+    <update id="updateImg" parameterType="com.example.xjlacgapp.pojo.User">
+        update acg_users set img = #{img} where id = #{id}
+    </update>
+    <update id="updateUserInfo" parameterType="com.example.xjlacgapp.pojo.User">
+        update acg_users set phone = #{phone},email = #{email}, address = #{address}, provincial = #{provincial}, city = #{city} where nickname = #{nickname}
+    </update>
+    <select id="findByNickname" resultType="com.example.xjlacgapp.pojo.User">
+        select top ${pageSize} o.* from (select row_number() over(order by id desc) as rownumber,* from(select * from acg_users where nickname like '%'+#{nickname}+'%' and type = '普通用户') as oo) as o where rownumber > #{currentPage};
+    </select>
+    <select id="findById" resultType="com.example.xjlacgapp.pojo.User">
+        select * from acg_users where  id = #{id}
+    </select>
+    <select id="findByType" resultType="com.example.xjlacgapp.pojo.User">
+        select * from acg_users where type = #{type}
+    </select>
+    <select id="findSex" resultType="com.example.xjlacgapp.pojo.User">
+        select  sex name, count(name)   value   from  acg_users   where type = '普通用户' group by   sex
+    </select>
+    <select id="findAge" resultType="com.example.xjlacgapp.pojo.User">
+        SELECT '-20' name, COUNT(*) value
+        FROM acg_users
+        WHERE 20 >= [year]  and type = '普通用户'
+        UNION ALL
+        SELECT '21-25' name, COUNT(*) value
+        FROM acg_users
+        WHERE [year] BETWEEN 21 AND 25 and type = '普通用户'
+        UNION ALL
+        SELECT '26-' name, COUNT(*) value
+        FROM acg_users
+        WHERE [year] >= 26 and type = '普通用户'
+    </select>
+    <select id="findAddress" resultType="com.example.xjlacgapp.pojo.User">
+        select  provincial name, count(name)   value   from  acg_users where type = '普通用户' group by   provincial
+    </select>
+    <select id="queryAge1" resultType="com.example.xjlacgapp.pojo.User">
+        select * from acg_users where 20 >= year
+    </select>
+    <select id="queryAge2" resultType="com.example.xjlacgapp.pojo.User">
+        select * from acg_users where year BETWEEN 21 AND 25
+    </select>
+    <select id="queryAge3" resultType="com.example.xjlacgapp.pojo.User">
+        select * from acg_users where  year >= 26
+    </select>
+</mapper>

@@ -1,0 +1,11 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.xjlacgapp.mapper.ReplyMapper">
+    <insert id="addReply" parameterType="com.example.xjlacgapp.pojo.Reply">
+        insert into acg_reply values (#{id},#{userid},#{reply},#{createtime})
+    </insert>
+    <select id="queryById" resultType="com.example.xjlacgapp.pojo.Reply">
+        select * from acg_reply where id = #{id} order by createtime desc
+    </select>
+</mapper>

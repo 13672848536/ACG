@@ -1,0 +1,17 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.xjlacgapp.mapper.FavoritesMapper">
+    <select id="findFavorites" resultType="com.example.xjlacgapp.pojo.Favorites">
+        SELECT * FROM acg_favorites  where productid = #{productid} and userid = #{userid}
+    </select>
+    <insert id="addFavorites" parameterType="com.example.xjlacgapp.pojo.Favorites">
+        insert into acg_favorites values (#{userid},#{productid})
+    </insert>
+    <delete id="deleteByFavorites" parameterType="com.example.xjlacgapp.pojo.Favorites">
+        delete from acg_favorites where productid = #{productid} and userid = #{userid}
+    </delete>
+    <select id="queryById" resultType="com.example.xjlacgapp.pojo.Favorites">
+        select * from acg_favorites where userid = #{userid}
+    </select>
+</mapper>

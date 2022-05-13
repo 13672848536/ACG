@@ -1,0 +1,11 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.xjlacgapp.mapper.ProvincialMapper">
+    <select id="queryAll" resultType="com.example.xjlacgapp.pojo.Provincial">
+        select * from Provincial
+    </select>
+    <select id="queryById" resultType="com.example.xjlacgapp.pojo.Provincial">
+        select * from Provincial where pid = #{pid}
+    </select>
+</mapper>

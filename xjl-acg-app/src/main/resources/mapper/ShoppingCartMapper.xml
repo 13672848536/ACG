@@ -1,0 +1,14 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.xjlacgapp.mapper.ShoppingCartMapper">
+    <insert id="addShoppingCart" parameterType="com.example.xjlacgapp.pojo.ShoppingCart">
+        insert into acg_shoppingcart values (#{userid},#{productid},#{amount},#{id},#{type},#{size})
+    </insert>
+    <select id="queryById" resultType="com.example.xjlacgapp.pojo.ShoppingCart">
+        select * from acg_shoppingcart where userid = #{userid}
+    </select>
+    <delete id="deleteByShoppingCart" parameterType="com.example.xjlacgapp.pojo.ShoppingCart">
+        delete from acg_shoppingcart where id = #{id}
+    </delete>
+</mapper>
